@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/screens/meal_details_screen.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem({
     super.key,
+    required this.id,
     required this.title,
     required this.imageUrl,
     required this.duration,
@@ -11,17 +13,50 @@ class MealItem extends StatelessWidget {
     required this.affordability,
   });
 
-  void selectMeal() {}
+  void selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      MealDetailScreen.routName,
+      arguments: id,
+    );
+  }
+
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
 
+  String get complexityText {
+    switch (complexity) {
+      case Complexity.simple:
+        return 'Simple';
+      case Complexity.hard:
+        return 'Hard';
+      case Complexity.challenging:
+        return 'Challenging';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  String get affordabilityText {
+    switch (affordability) {
+      case Affordability.affordable:
+        return 'Affordable';
+      case Affordability.luxurious:
+        return 'Expensive';
+      case Affordability.pricey:
+        return 'Pricey';
+      default:
+        return 'Unknown';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -70,45 +105,40 @@ class MealItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.schedule,
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Text('$duration min'),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.schedule,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text('$duration min'),
+                    ],
                   ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.schedule,
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Text('$duration min'),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.work,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(complexityText),
+                    ],
                   ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.schedule,
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Text('$duration min'),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.attach_money,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(affordabilityText),
+                    ],
                   ),
                 ],
               ),
