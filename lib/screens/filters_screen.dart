@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:meals_app/widgets/main_Drawer.dart';
+import 'package:meals_app/widgets/main_drawer.dart';
 
 class FilterScreen extends StatefulWidget {
   static const routeName = '/filters';
@@ -70,14 +68,14 @@ class _FilterScreenState extends State<FilterScreen> {
           )
         ],
       ),
-      drawer: const MainDrawer(),
+      drawer: const MainDrawers(),
       body: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(20),
             child: Text(
               'Adjust your meal selection.',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           Expanded(

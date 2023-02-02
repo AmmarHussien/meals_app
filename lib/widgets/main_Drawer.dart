@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../screens/filters_screen.dart';
-import '../screens/tabs_screen.dart';
-
-class MainDrawer extends StatelessWidget {
-  const MainDrawer({super.key});
+class MainDrawers extends StatelessWidget {
+  const MainDrawers({super.key});
 
   Widget drawer(
     BuildContext context,
